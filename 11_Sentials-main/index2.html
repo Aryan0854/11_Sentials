@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Incidents Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Security Incidents Dashboard</h1>
+            <div class="status">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+                <span>Active Monitoring</span>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value" id="total-incidents">0</div>
+                <div class="stat-label">Total Incidents</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value critical" id="critical-incidents">0</div>
+                <div class="stat-label">Critical</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value high" id="high-incidents">0</div>
+                <div class="stat-label">High</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value medium" id="medium-incidents">0</div>
+                <div class="stat-label">Medium</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value low" id="low-incidents">0</div>
+                <div class="stat-label">Low</div>
+            </div>
+        </div>
+
+        <!-- Incidents Feed -->
+        <div class="incidents-container">
+            <h2>Live Security Incidents</h2>
+            <div id="incidents-feed" class="incidents-feed"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

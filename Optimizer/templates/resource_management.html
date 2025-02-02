@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Monitor</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: max-content;
+            background-color: #000000;
+        }
+
+        h1, h1 {
+            font-size: 2.5rem;
+            color: #996bc3;
+        }
+
+        body {
+            overflow-y: scroll;
+        }
+
+        .bottom-half {
+            height: max-content;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .frame-container {
+            width: 80%;
+            height: auto;
+            border: 1px solid #000000;
+        }
+
+        iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            overflow-y: scroll;
+        }
+
+        /* Styling to ensure button stays below "System Information" */
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        #killProcesses {
+            margin-top: 20px; /* Adjust the margin for spacing */
+        }
+        .btn-danger {
+            color: #fff;
+            background-color: #9333EA;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">System Monitor</h1>
+        <div id="alert" class="alert alert-warning" style="display: none;"></div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header" >System Information</div>
+                    <div class="card-body">
+                        <h5>CPU Usage: <span id="cpuUsage">0%</span></h5>
+                        <h5>Memory Usage: <span id="memoryUsage">0%</span></h5>
+                        <h5>Disk Usage: <span id="diskUsage">0%</span></h5>
+                        <!-- Button placed below "System Information" -->
+                        <button id="killProcesses" class="btn btn-danger">Kill Heavy Processes</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">Heavy Processes</div>
+                    <div class="card-body">
+                        <ul id="heavyProcesses" class="list-group"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function fetchSystemInfo() {
+            fetch('/system_info')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('cpuUsage').innerText = data.cpu_percent + '%';
+                    document.getElementById('memoryUsage').innerText = data.memory_percent + '%';
+                    document.getElementById('diskUsage').innerText = data.disk_percent + '%';
+    
+                    const heavyProcessesList = document.getElementById('heavyProcesses');
+                    heavyProcessesList.innerHTML = ''; 
+    
+                    data.heavy_processes.forEach(proc => {
+                        const li = document.createElement('li');
+                        li.className = 'list-group-item';
+                        li.innerText = proc;
+                        heavyProcessesList.appendChild(li);
+                    });
+                });
+        }
+    
+        document.getElementById('killProcesses').addEventListener('click', () => {
+            fetch('/kill_processes', {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(result => {
+                alert(result.message);
+                fetchSystemInfo();
+            });
+        });
+    
+        setTimeout(() => {
+            fetchSystemInfo();
+            setInterval(fetchSystemInfo, 100);
+        }, 30000);
+    </script>    
+</body>
+</html>

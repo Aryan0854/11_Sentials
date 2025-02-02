@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Login Page -->
+        <div id="loginPage" class="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-800 via-purple-800 to-black">
+            <div class="max-w-md w-full mx-4">
+                <div class="bg-gray-900 rounded-2xl shadow-xl p-8 space-y-8">
+                    <div class="text-center">
+                        <div class="inline-flex p-4 bg-purple-100 rounded-full">
+                            <svg class="h-12 w-12 text-purple-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h2 class="mt-6 text-3xl font-extrabold text-white">Sentinal</h2>
+                        <p id="loginSubtext" class="mt-2 text-sm text-gray-400">Sign in to your account</p>
+                    </div>
+
+                    <form id="loginForm" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300">Email address</label>
+                            <input type="email" id="email" required class="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-700 shadow-sm focus:ring-2 focus:ring-purple-500 focus:border-purple-500" placeholder="Enter your email">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300">Password</label>
+                            <input type="password" id="password" required class="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-700 shadow-sm focus:ring-2 focus:ring-purple-500 focus:border-purple-500" placeholder="Enter your password">
+                        </div>
+                        <button type="submit" class="w-full flex justify-center py-3 px-4 rounded-lg text-sm font-semibold text-white bg-gradient-to-r from-purple-600 to-black hover:from-purple-700 hover:to-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 shadow-lg transform transition hover:-translate-y-0.5">
+                            Sign In
+                        </button>
+                    </form>
+
+                    <div class="text-center">
+                        <button id="toggleSignUp" class="text-sm text-purple-400 hover:text-purple-300 font-medium">
+                            Need an account? Sign up
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Page -->
+        <div id="dashboardPage" class="hidden">
+            <nav class="bg-gray-900 shadow-sm">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex justify-between h-16 items-center">
+                        <div class="flex items-center">
+                            <svg class="h-8 w-8 text-purple-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                            <span class="ml-2 text-xl font-semibold text-white">Sentinal</span>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <a href="11_Sentials-main\index2.html" id="a" class="b flex items-center px-4 py-2 text-sm font-medium text-white bg-purple-600 rounded-md hover:bg-purple-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7" />
+                                </svg>                                 
+                                Security Incidents Dashboard
+                            </a>
+                            
+                            
+                            <button id="connectDbBtn" class="flex items-center px-4 py-2 text-sm font-medium text-white bg-purple-600 rounded-md hover:bg-purple-700">
+                                <svg class="h-4 w-4 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
+                                </svg>
+                                Connect Database
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8" id="metricsGrid">
+                    <!-- Metrics cards will be inserted here -->
+
+                </div>
+
+                        <div>
+                            <!DOCTYPE html>
+                            <html lang="en">
+                            <head>
+                                <meta charset="UTF-8">
+                                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                <title>Website with Bottom Frame</title>
+                                <style>
+                                    
+                                    body, html {
+                                        margin: 0;
+                                        padding: 0;
+                                        height:max-content;
+                                        background-color:#000000;
+                                    }
+            
+                                    body{
+                                        overflow-y:scroll;
+                                    }
+                            
+                                    .bottom-half {
+                                        height:max-content;
+                                        width: 100%;
+                                        display: flex;
+                                        justify-content: center;
+                                        align-items: center;
+                                    }
+                            
+
+                                    .frame-container {
+                                        width: 80%;
+                                        height:auto;
+                                        border: 1px solid #ffffff;
+                                        border-radius: 5px;
+                                    }
+                            
+
+                                    iframe {
+                                        width: 100%;
+                                        height:500px;
+                                        border: none;
+                                        overflow-y:scroll;
+                                    }
+                                </style>
+                            </head>
+                            <body>
+            
+                                <div class="bottom-half">
+                                    <div class="frame-container">
+                                        <iframe src="http://127.0.0.1:8080"></iframe>
+                                    </div>
+                                </div>
+                            </body>
+                            </html>
+                        </div>
+
+            <div>
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Website with Bottom Frame</title>
+                    <style>
+                        body, html {
+                            margin: 0;
+                            padding: 0;
+                            height: max-content;
+                            background-color: #1a1a1a; /* Dark background */
+                        }
+                
+                        body {
+                            overflow-y: scroll;
+                        }
+                
+                        .bottom-half {
+                            height: max-content;
+                            width: 100%;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                        }
+                
+                        .frame-container {
+                            width: 80%;
+                            height: auto;
+                            border: 1px solid #000000; /* Purple border */
+                            background-color: #2a2a2a; /* Darker background for the frame */
+                            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7); /* Shadow effect */
+                        }
+                
+                        iframe {
+                            width: 100%;
+                            height: 500px;
+                            border: none;
+                            overflow-y: scroll;
+                            background-color: #3e3e3e; /* Dark grey for iframe */
+                        }
+                    </style>
+                </head>
+                <body>
+                
+                    <div class="bottom-half">
+                        <div class="frame-container">
+                            <iframe src="http://127.0.0.1:5000"></iframe>
+                        </div>
+                    </div>
+                
+                </body>
+                </html>
+             </div>
+
+            <!-- Chat Button -->
+            <button id="chatToggle" class="fixed bottom-8 right-8 p-4 bg-gradient-to-r from-purple-600 to-black text-white rounded-full shadow-lg hover:shadow-xl transform transition-all hover:-translate-y-1">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+            </button>
+
+            <!-- Chat Window -->
+            <div id="chatWindow" class="hidden fixed bottom-24 right-8 w-96 bg-gray-900 rounded-lg shadow-xl">
+                <!-- Chat content will be inserted here -->
+            </div>
+        </div>
+
+        <!-- Database Connection Modal -->
+        <div id="dbModal" class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center">
+            <!-- Modal content will be inserted here -->
+        </div>
+    </div>
+
+    <script src="js/main.js" type="module"></script>
+</body>
+</html>

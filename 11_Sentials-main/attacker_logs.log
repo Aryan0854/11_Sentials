@@ -1,0 +1,48 @@
+Port scan detected from IP: 185.220.101.45 - Scanning ports 22, 80, 443
+Failed login attempt from IP: 45.155.205.233
+Unauthorized admin access attempt from IP: 10.0.0.5 - user=root
+Failed login attempt from IP: 192.168.1.101
+Unauthorized admin access attempt from IP: 203.0.113.45 - user=root
+SQL Injection detected from IP: 192.168.1.101 - Payload: ' OR 1=1 --
+Failed login attempt from IP: 192.168.1.101
+Brute force attack detected from IP: 185.220.101.45
+Unauthorized admin access attempt from IP: 10.0.0.5 - user=root
+Port scan detected from IP: 45.155.205.233 - Scanning ports 22, 80, 443
+Port scan detected from IP: 185.220.101.45 - Scanning ports 22, 80, 443
+Brute force attack detected from IP: 185.220.101.45
+SQL Injection detected from IP: 45.155.205.233 - Payload: ' OR 1=1 --
+Port scan detected from IP: 45.155.205.233 - Scanning ports 22, 80, 443
+Port scan detected from IP: 10.0.0.5 - Scanning ports 22, 80, 443
+Brute force attack detected from IP: 192.168.1.101
+Unauthorized admin access attempt from IP: 10.0.0.5 - user=root
+Failed login attempt from IP: 185.220.101.45
+Unauthorized admin access attempt from IP: 192.168.1.101
+Brute force attack detected from IP: 192.168.1.101
+Brute force attack detected from IP: 192.168.1.101
+Brute force attack detected from IP: 203.0.113.45
+Brute force attack detected from IP: 10.0.0.5
+Unauthorized admin access attempt from IP: 10.0.0.5
+Failed login attempt from IP: 10.0.0.5
+Failed login attempt from IP: 10.0.0.5
+Failed login attempt from IP: 10.0.0.5
+Brute force attack detected from IP: 192.168.1.101
+Failed login attempt from IP: 203.0.113.45
+Failed login attempt from IP: 10.0.0.5
+Failed login attempt from IP: 10.0.0.5
+Unauthorized admin access attempt from IP: 203.0.113.45
+Port scan detected from IP: 203.0.113.45
+Failed login attempt from IP: 192.168.1.101
+SQL Injection detected from IP: 192.168.1.101
+Port scan detected from IP: 10.0.0.5
+Failed login attempt from IP: 192.168.1.101
+Failed login attempt from IP: 10.0.0.5
+Port scan detected from IP: 10.0.0.5
+Brute force attack detected from IP: 203.0.113.45
+Port scan detected from IP: 10.0.0.5
+Unauthorized admin access attempt from IP: 203.0.113.45
+Failed login attempt from IP: 192.168.1.101
+Port scan detected from IP: 203.0.113.45
+SQL Injection detected from IP: 192.168.1.101
+Port scan detected from IP: 192.168.1.101
+Brute force attack detected from IP: 192.168.1.101
+Unauthorized admin access attempt from IP: 203.0.113.45
