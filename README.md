@@ -59,4 +59,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ```
 
-This `README.md` provides an overview of your project, including setup instructions and features. You can replace placeholders with actual data, and tweak it according to your preferences!
