@@ -1,4 +1,3 @@
-```markdown
 # Sentinal
 
 **Sentinal** is a web-based application featuring a login page and a dashboard for managing security incidents. It includes functionalities like a database connection, a chat window, and an embedded iframe for real-time monitoring. The application uses HTML, CSS (Tailwind), and JavaScript.
@@ -56,6 +55,4 @@ open index.html
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-```
 
