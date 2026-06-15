@@ -1,0 +1,61 @@
+/* Modern Dark Theme Scrollbars */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #06070a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(139, 92, 246, 0.2);
+    border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(139, 92, 246, 0.4);
+}
+
+/* Base custom styles */
+body {
+    background-color: #06070a;
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.03) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(168, 85, 247, 0.03) 0px, transparent 50%);
+}
+
+.metric-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.metric-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(168, 85, 247, 0.2);
+    box-shadow: 0 10px 30px -10px rgba(168, 85, 247, 0.15);
+}
+
+.progress-bar {
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chat-message {
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+/* Animations */
+@keyframes pulseGlow {
+    0%, 100% {
+        opacity: 0.8;
+        box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
+    }
+    50% {
+        opacity: 1;
+        box-shadow: 0 0 25px rgba(168, 85, 247, 0.4);
+    }
+}
+
+.glow-btn {
+    animation: pulseGlow 3s infinite ease-in-out;
+}

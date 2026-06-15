@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Monitor & Diagnostics</title>
+    <!-- Modern Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS for grid system, overridden by custom styles -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body, html {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #06070a;
+            color: #f3f4f6;
+            margin: 0;
+            padding: 1rem;
+            overflow-y: auto;
+            min-height: 100vh;
+        }
+
+        /* Container & Grid layout */
+        .container-fluid {
+            padding: 0;
+        }
+
+        /* Card styling using glassmorphism */
+        .diag-card {
+            background-color: rgba(13, 14, 21, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+
+        .diag-card:hover {
+            border-color: rgba(139, 92, 246, 0.15);
+        }
+
+        .diag-card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+            color: #a78bfa;
+            letter-spacing: -0.01em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Stat items */
+        .stat-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stat-item-label {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #9ca3af;
+        }
+
+        .stat-item-value {
+            font-size: 1.15rem;
+            font-weight: 700;
+            font-family: monospace;
+        }
+
+        #cpuUsage { color: #c084fc; }
+        #memoryUsage { color: #34d399; }
+        #diskUsage { color: #fb923c; }
+
+        /* Buttons */
+        .action-btn {
+            width: 100%;
+            background: linear-gradient(to right, #7c3aed, #4f46e5);
+            border: none;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 0.85rem 1.25rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.25);
+            margin-top: auto;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
+            color: #fff;
+        }
+
+        .action-btn:active {
+            transform: translateY(0);
+        }
+
+        /* List group styling */
+        .process-list {
+            list-style: none;
+            overflow-y: auto;
+            max-height: 250px;
+            padding-right: 0.25rem;
+        }
+
+        .process-item {
+            background: rgba(6, 7, 10, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            color: #e5e7eb;
+            margin-bottom: 0.5rem;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.825rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Alerts banner */
+        .custom-alert {
+            background-color: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            font-size: 0.875rem;
+            margin-bottom: 1.25rem;
+            display: none;
+        }
+
+        /* Scrollbars */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- System Alert Banner -->
+        <div id="alert" class="custom-alert"></div>
+
+        <div class="row">
+            <!-- Diagnostics / System Info Card -->
+            <div class="col-md-6 mb-4 mb-md-0">
+                <div class="diag-card">
+                    <div class="diag-card-title">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                        System Metrics
+                    </div>
+                    <div class="diag-card-body flex-grow-1">
+                        <div class="stat-item">
+                            <span class="stat-item-label">CPU Load</span>
+                            <span class="stat-item-value" id="cpuUsage">0%</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-item-label">Memory Utilization</span>
+                            <span class="stat-item-value" id="memoryUsage">0%</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-item-label">Disk Storage</span>
+                            <span class="stat-item-value" id="diskUsage">0%</span>
+                        </div>
+                    </div>
+                    <button id="killProcesses" class="action-btn">Kill Heavy Processes</button>
+                </div>
+            </div>
+
+            <!-- Heavy Processes Card -->
+            <div class="col-md-6">
+                <div class="diag-card">
+                    <div class="diag-card-title">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                        </svg>
+                        Heavy Processes (>10% CPU)
+                    </div>
+                    <div class="diag-card-body flex-grow-1">
+                        <ul id="heavyProcesses" class="process-list">
+                            <!-- Populated dynamically -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function fetchSystemInfo() {
+            fetch('/system_info')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('cpuUsage').innerText = data.cpu_percent + '%';
+                    document.getElementById('memoryUsage').innerText = data.memory_percent + '%';
+                    document.getElementById('diskUsage').innerText = data.disk_percent + '%';
+    
+                    const heavyProcessesList = document.getElementById('heavyProcesses');
+                    heavyProcessesList.innerHTML = ''; 
+    
+                    if (data.heavy_processes && data.heavy_processes.length > 0) {
+                        data.heavy_processes.forEach(proc => {
+                            const li = document.createElement('li');
+                            li.className = 'process-item';
+                            
+                            // Separate process name and ID if possible
+                            const match = proc.match(/(.+)\s+\(PID:\s+(\d+)\)/);
+                            if (match) {
+                                li.innerHTML = `<span>${match[1]}</span><span class="text-muted text-xs">PID: ${match[2]}</span>`;
+                            } else {
+                                li.innerText = proc;
+                            }
+                            heavyProcessesList.appendChild(li);
+                        });
+                    } else {
+                        const li = document.createElement('li');
+                        li.className = 'process-item text-center text-muted justify-content-center';
+                        li.innerText = 'No heavy processes detected';
+                        heavyProcessesList.appendChild(li);
+                    }
+                })
+                .catch(err => {
+                    console.error("Error fetching system info:", err);
+                });
+        }
+    
+        document.getElementById('killProcesses').addEventListener('click', () => {
+            const btn = document.getElementById('killProcesses');
+            const originalText = btn.innerText;
+            btn.innerText = 'Optimizing...';
+            btn.disabled = true;
+
+            fetch('/kill_processes', {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(result => {
+                const alertBanner = document.getElementById('alert');
+                alertBanner.innerText = result.message;
+                alertBanner.style.display = 'block';
+                
+                // Hide alert banner after 4 seconds
+                setTimeout(() => {
+                    alertBanner.style.display = 'none';
+                }, 4000);
+
+                fetchSystemInfo();
+            })
+            .catch(err => {
+                console.error("Error killing processes:", err);
+            })
+            .finally(() => {
+                btn.innerText = originalText;
+                btn.disabled = false;
+            });
+        });
+    
+        // Load system info immediately and refresh every 2.5 seconds
+        fetchSystemInfo();
+        setInterval(fetchSystemInfo, 2500);
+    </script>    
+</body>
+</html>

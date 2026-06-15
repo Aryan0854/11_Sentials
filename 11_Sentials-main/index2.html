@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Threat Simulation & Defense Dashboard - Sentinal</title>
+    <!-- Modern Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Dashboard Header -->
+        <div class="header">
+            <div class="header-left">
+                <a href="../index.html" class="back-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    Back to Command Center
+                </a>
+                <h1>Threat Simulation & Automated Defense</h1>
+            </div>
+            <div class="status">
+                <span class="pulse-indicator"></span>
+                <span id="monitoring-text">Active Monitoring</span>
+            </div>
+        </div>
+
+        <!-- Simulation Control Center -->
+        <div class="sim-controls-card mb-8">
+            <!-- Database Warning Banner -->
+            <div id="db-warning-banner" class="db-banner-warning hidden">
+                <svg class="banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                </svg>
+                <span>Warning: Attack simulation is disabled. Connect a database in the <a href="../index.html" style="color: #c084fc; text-decoration: underline; font-weight: 600;">Command Center</a> first.</span>
+            </div>
+            <div class="sim-header">
+                <h2>Simulation Control Deck</h2>
+                <p>Launch real-time cybersecurity threats to test the automated defense agents response loop.</p>
+            </div>
+            <div class="sim-btn-group">
+                <button id="launchAttackBtn" class="sim-btn attack-btn">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                    </svg>
+                    Launch Live Threat Attack
+                </button>
+                <button id="toggleDefenseBtn" class="sim-btn defense-btn-active">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    Defense Shield: ENABLED
+                </button>
+            </div>
+        </div>
+
+        <!-- Threat Metrics Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value" id="total-incidents">0</div>
+                <div class="stat-label">Total Incidents</div>
+            </div>
+            <div class="stat-card border-critical">
+                <div class="stat-value critical" id="critical-incidents">0</div>
+                <div class="stat-label">Critical Attacks</div>
+            </div>
+            <div class="stat-card border-high">
+                <div class="stat-value high" id="high-incidents">0</div>
+                <div class="stat-label">High Severity</div>
+            </div>
+            <div class="stat-card border-medium">
+                <div class="stat-value medium" id="medium-incidents">0</div>
+                <div class="stat-label">Medium Severity</div>
+            </div>
+            <div class="stat-card border-low">
+                <div class="stat-value low" id="low-incidents">0</div>
+                <div class="stat-label">Low Severity</div>
+            </div>
+        </div>
+
+        <!-- Side-by-side Feed and Firewall Blocks -->
+        <div class="dashboard-split-grid mb-8">
+            <!-- Incidents Feed Container -->
+            <div class="incidents-container">
+                <h2>Live Attack Stream</h2>
+                <div id="incidents-feed" class="incidents-feed"></div>
+            </div>
+
+            <!-- Local Blocked IPs list -->
+            <div class="incidents-container">
+                <h2>Firewall Active Blocklist</h2>
+                <div class="blocklist-header mb-4">
+                    <p class="text-muted">IP addresses blocked by the security agent's intrusion prevention firewall rules.</p>
+                </div>
+                <div id="blocked-ips-feed" class="incidents-feed">
+                    <!-- Blocked IPs will load here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
